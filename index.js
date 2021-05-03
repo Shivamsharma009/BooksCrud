@@ -26,16 +26,47 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 
-
 const bodyParser = require('body-parser');
+const morgan = require('morgan');
+
+
+//create a middleware
+app.use((req,res,next) => {
+    console.log("Hello from the middleware");
+    next();
+})
+
+
+app.use((req,res,next) => {
+     console.log(new Date().toString());
+
+    next();
+})
 
 const bookRoutes = require('./routes/booksRoutes');
+
 
 
 
 //middle --> one to other
 app.use('/', bookRoutes);
 app.use(bodyParser.json());
+
+//create a custom  middleware using morgan
+
+
+if(process.env.NODE_ENV === 'development'){
+    app.use(morgan('dev'));
+    console.log("Hello Middleware!")
+}
+
+
+//create your own middleware
+
+
+
+
+
 
 
 
@@ -69,30 +100,6 @@ const books = [
         country: 'India'
     },
 ];
-
-//read data
-// app.get('/', (req,res) => {
-//     res.send(`<h1>Hello from the Server!</h1>`);
-// })
-
-
-
-
-
-
-//locally test
-// app.get('/books', (req,res) => {
-//     res.json({data : books});
-// })
-
-
-
-// //create date
-// app.post('/books', (req,res) => {
-//     books.push(req.body);
-//     console.log(req.body);
-//     res.json({message: 'Sucess', data: books});
-// })
 
 
 

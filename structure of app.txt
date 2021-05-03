@@ -1,0 +1,24 @@
+
+first create index.js / anyNAme.js
+    basic steps
+          require express()
+          create route
+          connect with the database
+
+    route  
+         require body-parser
+         create a Schema and Model
+         create rest-api
+
+
+         Restful api
+         ---------------
+
+         1. Seperate api into logical resources
+
+                books
+                   define path
+                create a Schema
+                create route
+
+          Every Resource should have Seperate
